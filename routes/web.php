@@ -109,3 +109,13 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/make-me-admin', function () {
+    $user = \App\Models\User::first();
+    if ($user) {
+        $user->role = 'admin';
+        $user->save();
+        return 'Tebrikler! Admin yetkisi başarıyla tanımlandı. Artık /admin paneline gidebilirsiniz.';
+    }
+    return 'Önce siteye normal bir kayıt olmalısın!';
+});
