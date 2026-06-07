@@ -118,9 +118,9 @@ Route::get('/make-me-admin', function () {
         return 'Tebrikler! Admin yetkisi başarıyla tanımlandı. Artık /admin paneline gidebilirsiniz.';
     }
     return 'Önce siteye normal bir kayıt olmalısın!';
+});
 
-    Route::get('/verileri-esitle', function () {
+Route::get('/verileri-esitle', function () {
     \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
     return 'Harika! Eski kullanicilar, duyurular ve magaza urunleri basariyla buluta aktarildi!';
-});
 });
