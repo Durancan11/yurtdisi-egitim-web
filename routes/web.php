@@ -120,7 +120,10 @@ Route::get('/sayaclari-duzelt', function () {
         \Illuminate\Support\Facades\DB::statement("SELECT setval('announcements_id_seq', (SELECT COALESCE(MAX(id), 1) FROM announcements))");
         \Illuminate\Support\Facades\DB::statement("SELECT setval('products_id_seq', (SELECT COALESCE(MAX(id), 1) FROM products))");
         \Illuminate\Support\Facades\DB::statement("SELECT setval('users_id_seq', (SELECT COALESCE(MAX(id), 1) FROM users))");
-        return 'Harika! Tum veritabani sayaclari senkronize edildi ve çakışma giderildi.';
+        
+        \Illuminate\Support\Facades\DB::statement("SELECT setval('balance_requests_id_seq', (SELECT COALESCE(MAX(id), 1) FROM balance_requests))");
+        
+        return 'Harika! Tum veritabani sayaclari (Bakiye Talepleri dahil) senkronize edildi ve çakışma giderildi.';
     } catch (\Exception $e) {
         return 'Hata: ' . $e->getMessage();
     }
