@@ -1,61 +1,91 @@
-Global Vizyon - Yurtdışı Eğitim Danışmanlığı Platformu
+# 🌐 Global Vizyon - Yurtdışı Eğitim Danışmanlığı Platformu
 
-Bu proje, Kocaeli Üniversitesi Bilişim Sistemleri Mühendisliği Bölümü Web Programlama dersi kapsamında geliştirilmiş; öğrencilerin yurtdışı eğitim paketlerini inceleyebildiği, sanal cüzdan/bakiye yönetimiyle satın alım yapabildiği, yöneticilerin ise tüm sistemi dinamik bir panel üzerinden kontrol edebildiği uçtan uca (end-to-end) bir E-Ticaret ve Otomasyon Sistemidir.
+Global Vizyon, Kocaeli Üniversitesi Bilişim Sistemleri Mühendisliği Web Programlama kapsamında geliştirilmiş, uçtan uca bir **yurtdışı eğitim danışmanlığı ve e-ticaret platformudur**.
 
-Proje, kurumsal yazılım standartlarına uygun olarak MVC (Model-View-Controller) mimari deseniyle kodlanmış, yerelde ve bulutta çalışabilecek şekilde tasarlanmış ve CI/CD (Sürekli Entegrasyon / Sürekli Dağıtım) süreçleri entegre edilerek canlı ortama alınmıştır.
+Sistem, öğrencilerin yurtdışı eğitim paketlerini inceleyip satın alabildiği, sanal cüzdan sistemi ile ödeme yapabildiği ve yöneticilerin tüm süreci merkezi bir admin panel üzerinden yönetebildiği tam kapsamlı bir web uygulamasıdır.
 
-🛠️ Teknik Mimari ve Teknolojik Altyapı
-Backend Framework: PHP 8.x / Laravel 10.x (MVC)
-Veritabanı:
-Geliştirme: MySQL (phpMyAdmin)
-Production: PostgreSQL (Render Cloud Database)
-Sunucu / DevOps: Render (PaaS)
-Frontend: Blade Template Engine, HTML5, CSS3, JavaScript
-CI/CD: GitHub Webhooks ile otomatik deploy
-🚀 Öne Çıkan Özellikler
-1. Kapalı Devre Finans ve Sipariş Sistemi
+---
 
-Harici ödeme sistemi kullanmadan çalışan sanal cüzdan altyapısı geliştirilmiştir.
+## 🚀 Proje Özellikleri
 
-Öğrenci bakiye talebi oluşturur
-Admin panel üzerinden onay/iptal yapılır
-Onaylanan bakiye DB::transaction ile güvenli şekilde hesaba aktarılır
-Kullanıcı bakiye ile eğitim paketlerini satın alabilir
-2. Role-Based Access Control (Middleware)
+- Eğitim paketlerini listeleme ve satın alma
+- Sanal cüzdan (bakiye yükleme ve harcama sistemi)
+- Sepet ve sipariş yönetimi
+- Admin paneli ile ürün, kullanıcı ve sipariş kontrolü
+- Rol bazlı erişim kontrolü (Admin / User)
+- Otomatik deploy (CI/CD entegrasyonu)
+- Bulut uyumlu mimari (Render PaaS)
 
-Laravel middleware yapısı ile güvenlik katmanı oluşturulmuştur:
+---
 
-auth, admin, checkStatus middleware
-Admin paneline yetkisiz erişim engellenir
-Pasif kullanıcılar sistem dışı bırakılır
-Kullanıcılar yalnızca kendi verilerine erişir
-3. Bulut Ortamı Problemleri ve Çözümler
+## 🛠️ Kullanılan Teknolojiler
 
-Render ücretsiz plan kısıtlarına karşı geliştirilmiş çözümler:
+- Backend: PHP 8+, Laravel 10
+- Frontend: Blade, HTML5, CSS3, JavaScript
+- Veritabanı:
+  - MySQL (development)
+  - PostgreSQL (production - Render)
+- DevOps / Hosting: Render (PaaS)
+- Version Control: Git & GitHub
+- CI/CD: GitHub Webhooks
 
-Ephemeral Storage Fix: /storage:link kopmalarına karşı runtime symbolic link yeniden oluşturma mekanizması
-ID Sequence Fix: PostgreSQL auto-increment uyuşmazlıkları için /sayaclari-duzelt endpoint’i
-Veri Bütünlüğü: PostgreSQL constraint uyumluluk optimizasyonları
-⚙️ Kurulum (Local Setup)
+---
+
+## 🧠 Mimari Yapı
+
+Proje MVC (Model - View - Controller) mimarisi ile geliştirilmiştir:
+
+- Model: Veritabanı işlemleri
+- View: Blade template arayüzleri
+- Controller: İş mantığı ve istek yönetimi
+
+---
+
+## 🔐 Güvenlik Özellikleri
+
+- Laravel Middleware tabanlı rol kontrolü
+- auth, admin ve checkStatus middleware yapıları
+- Kullanıcı bazlı veri izolasyonu
+- Transaction tabanlı güvenli bakiye işlemleri
+
+---
+
+## 💰 Sanal Cüzdan Sistemi
+
+- Kullanıcı bakiye yükleme talebi oluşturur
+- Admin onaylar veya reddeder
+- Onaylanan bakiye DB::transaction ile güvenli şekilde aktarılır
+- Kullanıcı bu bakiye ile eğitim paketi satın alabilir
+
+---
+
+## ☁️ Bulut Ortamı Çözümleri
+
+Render ücretsiz plan kısıtlarına karşı geliştirilen çözümler:
+
+- Storage link kopmalarına karşı otomatik yeniden oluşturma (/resimleri-bagla)
+- PostgreSQL ID sequence senkronizasyon çözümü (/sayaclari-duzelt)
+- Veritabanı constraint uyumluluk optimizasyonları
+
+---
+
+## ⚙️ Kurulum
+
+```bash
 git clone https://github.com/kullaniciadin/global-vizyon.git
 cd global-vizyon
-Bağımlılıklar
 composer install
 npm install
 npm run build
-Environment
 cp .env.example .env
 php artisan key:generate
-Veritabanı
 php artisan migrate --seed
-Storage Link
 php artisan storage:link
-Çalıştırma
 php artisan serve
-
+```
 Uygulama: http://localhost:8000
 
-📁 Proje Klasör Yapısı
+📁 Proje Yapısı
 app/Http/Controllers/
 ├── Admin/
 │   ├── BalanceRequestController.php
@@ -67,7 +97,7 @@ app/Http/Controllers/
 ├── ProfileController.php
 ├── ShopController.php
 └── Controller.php
-👨‍💻 Geliştirici
 
+👨‍💻 Geliştirici
 Duran Can Demirezen
 Kocaeli Üniversitesi – Bilişim Sistemleri Mühendisliği
