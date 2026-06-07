@@ -234,23 +234,19 @@ public function replyContact(Request $request, $id)
         try {
             $message = ContactMessage::findOrFail($id); 
             
-            // Doğrulama (validate) kurallarını tamamen kaldırdık. 
-            // Formdaki name ne ise onu yakalamak için garanti yöntem:
             $cevap = $request->admin_reply ?? $request->message ?? $request->reply ?? 'Bir yanıt gönderildi.';
 
             $message->admin_reply = $cevap;
-            $message->status = 'cevaplandi';
+            
+            $message->status = 'okundu'; 
             $message->save();
 
-            // Blade sayfasında uyarı mesajı kodları yoksa diye sonucu doğrudan beyaz ekrana yazdırıyoruz!
-            return "HARİKA! Yanıt veritabanına başarıyla işlendi. Şimdi tarayıcıdan 'Geri' tuşuna basıp sayfayı yenileyebilirsin.";
+            return back()->with('success', 'Yanıtınız başarıyla kaydedildi! 🚀');
             
         } catch (\Exception $e) {
-            // Eğer veritabanında bir sütun eksikse hatayı direkt beyaz ekranda okuyacağız:
-            return "HATA YAKALANDI: " . $e->getMessage();
+            return back()->with('error', 'Hata: ' . $e->getMessage());
         }
     }
-
     /**
      * Duyuruları Listeleme
      */
