@@ -85,16 +85,19 @@ php artisan serve
 ```
 Uygulama: http://localhost:8000
 
-📁 Proje Yapısı
-app/Http/Controllers/
+## Proje Yapısı
+app/
+└── Http/
+└── Controllers/
 ├── Admin/
-│   ├── BalanceRequestController.php
-│   ├── OrderController.php
-│   ├── ProductController.php
-│   └── UserController.php
-├── AdminController.php
+│ ├── AdminController.php
+│ ├── BalanceRequestController.php
+│ └── OrderController.php
+├── ProductController.php
+├── UserController.php
 ├── CartController.php
 ├── ProfileController.php
+├── CartController.php
 ├── ShopController.php
 └── Controller.php
 
