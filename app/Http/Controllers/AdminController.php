@@ -229,20 +229,26 @@ class AdminController extends Controller
         return back()->with('success', 'Mesaj okundu olarak işaretlendi.');
     }
 
-    public function replyContact(Request $request, $id)
+public function replyContact(Request $request, $id)
     {
-        $message = ContactMessage::findOrFail($id); 
-        
-        $request->validate([
-            'admin_reply' => 'required|string'
-        ]);
+        try {
+            $message = ContactMessage::findOrFail($id); 
+            
+            $request->validate([
+                'admin_reply' => 'required|string'
+            ]);
 
-        $message->update([
-            'admin_reply' => $request->admin_reply,
-            'status' => 'cevaplandi' 
-        ]);
+            // Fillable (Güvenlik) engeline takılmamak için doğrudan atama yapıyoruz:
+            $message->admin_reply = $request->admin_reply;
+            $message->status = 'cevaplandi';
+            $message->save();
 
-        return back()->with('success', 'Yanıtınız başarıyla kaydedildi! 🚀');
+            return back()->with('success', 'Yanıtınız başarıyla kaydedildi! 🚀');
+            
+        } catch (\Exception $e) {
+            // Siyah 500 ekranı yerine, hatayı ekrana net bir şekilde yazdırıyoruz!
+            return back()->with('error', 'Sistem Hatası: ' . $e->getMessage());
+        }
     }
 
     /**
