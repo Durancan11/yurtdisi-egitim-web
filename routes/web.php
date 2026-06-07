@@ -123,4 +123,11 @@ Route::get('/make-me-admin', function () {
 Route::get('/verileri-esitle', function () {
     \Illuminate\Support\Facades\Artisan::call('db:seed', ['--force' => true]);
     return 'Harika! Eski kullanicilar, duyurular ve magaza urunleri basariyla buluta aktarildi!';
+
+    
+});
+
+Route::get('/resimleri-bagla', function () {
+    \Illuminate\Support\Facades\Artisan::call('storage:link');
+    return 'Harika! Resim köprüsü başarıyla kuruldu.';
 });
