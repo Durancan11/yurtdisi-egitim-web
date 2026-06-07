@@ -85,22 +85,23 @@ php artisan serve
 ```
 Uygulama: http://localhost:8000
 
-## Proje Yapısı
+## 📋 Proje Yapısı
+
+```text
 app/
 └── Http/
-└── Controllers/
-├── Admin/
-│ ├── AdminController.php
-│ ├── BalanceRequestController.php
-│ └── OrderController.php
-├── ProductController.php
-├── UserController.php
-├── CartController.php
-├── ProfileController.php
-├── CartController.php
-├── ShopController.php
-└── Controller.php
-
+    └── Controllers/
+        ├── Admin/
+        │   ├── BalanceRequestController.php
+        │   ├── OrderController.php
+        │   ├── ProductController.php
+        │   └── UserController.php
+        ├── AdminController.php
+        ├── CartController.php
+        ├── ProfileController.php
+        ├── ShopController.php
+        └── Controller.php
+```
 👨‍💻 Geliştirici
 Duran Can Demirezen
 Kocaeli Üniversitesi – Bilişim Sistemleri Mühendisliği
