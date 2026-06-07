@@ -9,13 +9,13 @@ class DatabaseSeeder extends Seeder
     /**
      * Seed the application's database.
      */
-    public function run(): void
-    {
-        // Önceki deneme verilerini temizlemek ve 
-        // UserSeeder ile ProductSeeder'ı sisteme yüklemek için:
-        $this->call([
-            UserSeeder::class,
-            ProductSeeder::class,
-        ]);
-    }
+    public function run()
+{
+    $this->call([
+        AnnouncementsTableSeeder::class,
+        ProductsTableSeeder::class,
+        BalanceRequestsTableSeeder::class,
+        ContactMessagesTableSeeder::class,
+    ]);
+}
 }
