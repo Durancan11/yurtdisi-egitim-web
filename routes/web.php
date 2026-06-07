@@ -109,3 +109,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/resimleri-bagla', function () {
+    \Illuminate\Support\Facades\Artisan::call('storage:link');
+    return 'Resim köprüsü kuruldu.';
+});
